@@ -48,18 +48,18 @@ class ChatUser {
     });
   }
 
-  handlePrivateChat(text) {
-    this.room.private({
+  handleServerChat(text) {
+    this.room.broadcast({
       name: "server",
       type: 'chat',
       text: text
-    }, user)
+    })
   }
 
   async tellJoke() {
     let res = await axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single')
     let joke = (res.data.joke);
-    this.handleChat(joke);
+    this.handleServerChat(joke);
   }
   /** Handle messages from client:
    *
